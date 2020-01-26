@@ -1,0 +1,39 @@
+<p>posts works!</p>
+
+
+    
+  <!-- This style & functionality is similar to what Google uses. 
+  ACCORDION - attempt: 
+  Unfortunately, I cannot dynamicly concat # with Index value to make an accordion
+
+  DROPDOWN - implementation:
+  I just do not like the syle of the dropdown icon & the extra space it takes up
+  -->
+<div *ngIf="posts.length > 0">
+  <div 
+      class="card dropdown mx-auto" 
+      style="margin-top:30px; max-width: 450px;" 
+      *ngFor="let post of posts;"
+    >
+    
+    <div class="card-header dropdown-toggle" data-toggle="dropdown">
+      <span style="padding-right: 220px;">{{ post.title }}</span>
+    </div>
+    
+    <div class="dropdown-menu" style="width: 450px;">
+      <div class="card-body">
+        {{ post.content }}
+      </div>
+  
+      <div class="card-footer bg-white">
+        <button class="btn btn-sm btn-outline-danger ml-2 float-right" (click)="delete( post.id )">DELETE</button>
+        <button class="btn btn-sm btn-outline-primary float-right px-4">EDIT</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<p *ngIf="posts.length <= 0">No Posts added yet!</p>
+
+
