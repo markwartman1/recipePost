@@ -9,13 +9,14 @@
             name="title" 
             type="text" 
             placeholder="Put Title here..." 
-            [(ngModel)]="userInputTitle"
+            [ngModel]="post?.title"
             minlength="2"
-            required>
+            required
+            #title="ngModel">
     </div>
     <div class="form-group col-9 mx-auto">
         <!-- textarea: must stay in 1 LINE of code to work -->
-        <textarea name="content" class="form-control" placeholder="Type Post here..." rows="5" [(ngModel)]="userInputContent" minlength="3" required></textarea>
+        <textarea name="content" class="form-control" placeholder="Type Post here..." rows="5" [ngModel]="post?.content" #description="ngModel" minlength="3" required></textarea>
     </div>
     <button class="btn btn-outline-success col-6 mx-auto mb-5" type="submit">Post Now</button>
 </form>

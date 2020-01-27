@@ -1,6 +1,6 @@
 <p>posts works!</p>
 
-
+<app-post-create></app-post-create>
     
   <!-- This style & functionality is similar to what Google uses. 
   ACCORDION - attempt: 
@@ -27,7 +27,7 @@
   
       <div class="card-footer bg-white">
         <button class="btn btn-sm btn-outline-danger ml-2 float-right" (click)="delete( post.id )">DELETE</button>
-        <button class="btn btn-sm btn-outline-primary float-right px-4">EDIT</button>
+        <button class="btn btn-sm btn-outline-primary float-right px-4"><a [routerLink]="['/edit', post.id]">EDIT</a></button>
       </div>
     </div>
     

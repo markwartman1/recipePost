@@ -47,15 +47,33 @@ export class PostsService {
         return this.observedPosts.asObservable();
     }
 
+    getPost(id: string) {
+        return this.http.get<{ _id: string, title: string, content: string }>('http://localhost:3000/api/posts/' + id);
+    }
+
     addPost(pTitle: string, pContent: string) {
         const post: Post = { id: null, title: pTitle, content: pContent};
-        this.http.post<{message: string}>('http://localhost:3000/api/posts', post)
+        this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
             .subscribe((responseData) => {
-                console.log(responseData.message, "from post.service");
+                console.log(responseData.message, "Angular post.service http method:post");
+                post.id = responseData.postId;
                 this.posts.push(post);
                 this.observedPosts.next([...this.posts]);
         });
 
+    }
+
+    updatePost(id: string, title: string, content: string) {
+        const post: Post = {id: id, title: title, content: content};
+        this.http.put('http://localhost:3000/api/posts/' + id, post)
+            .subscribe(response => {
+                console.log(response);
+                const updatedPosts = [...this.posts];
+                const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id);
+                updatedPosts[oldPostIndex] = post;
+                this.posts = updatedPosts;
+                this.observedPosts.next([...this.posts]);
+            });
     }
 
     delete(postId: string) {
